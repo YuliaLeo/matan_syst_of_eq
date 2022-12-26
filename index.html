@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Лабораторная работа № 6</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="container">
+        <div class="equation">
+          <div class="equation__title">Задайте систему линейных уравнений</div>
+          <div class="equation__body">
+            <div class="equation-box">
+              <div class="equation-box__row">
+                <div class="equation-box__item">
+                  <input
+                    type="text"
+                    class="equation-box__input value"
+                    value="-10"
+                  />
+                  <div class="equation-box__variable">x1</div>
+                </div>
+                <div class="equation-box__sign">+</div>
+                <div class="equation-box__item">
+                  <input
+                    type="text"
+                    class="equation-box__input value"
+                    value="-2"
+                  />
+                  <div class="equation-box__variable">x2</div>
+                </div>
+                <div class="equation-box__sign">+</div>
+                <div class="equation-box__item">
+                  <input
+                    type="text"
+                    class="equation-box__input value"
+                    value="-2"
+                  />
+                  <div class="equation-box__variable">x3</div>
+                </div>
+                <div class="equation-box__sign">=</div>
+                <div class="equation-box__item">
+                  <input
+                    type="text"
+                    class="equation-box__input answer"
+                    value="6"
+                  />
+                </div>
+              </div>
+              <div class="equation-box__row">
+                <div class="equation-box__item">
+                  <input
+                    type="text"
+                    class="equation-box__input value"
+                    value="-1"
+                  />
+                  <div class="equation-box__variable">x1</div>
+                </div>
+                <div class="equation-box__sign">+</div>
+                <div class="equation-box__item">
+                  <input
+                    type="text"
+                    class="equation-box__input value"
+                    value="10"
+                  />
+                  <div class="equation-box__variable">x2</div>
+                </div>
+                <div class="equation-box__sign">+</div>
+                <div class="equation-box__item">
+                  <input
+                    type="text"
+                    class="equation-box__input value"
+                    value="-2"
+                  />
+                  <div class="equation-box__variable">x3</div>
+                </div>
+                <div class="equation-box__sign">=</div>
+                <div class="equation-box__item">
+                  <input
+                    type="text"
+                    class="equation-box__input answer"
+                    value="7"
+                  />
+                </div>
+              </div>
+              <div class="equation-box__row">
+                <div class="equation-box__item">
+                  <input
+                    type="text"
+                    class="equation-box__input value"
+                    value="-1"
+                  />
+                  <div class="equation-box__variable">x1</div>
+                </div>
+                <div class="equation-box__sign">+</div>
+                <div class="equation-box__item">
+                  <input
+                    type="text"
+                    class="equation-box__input value"
+                    value="-1"
+                  />
+                  <div class="equation-box__variable">x2</div>
+                </div>
+                <div class="equation-box__sign">+</div>
+                <div class="equation-box__item">
+                  <input
+                    type="text"
+                    class="equation-box__input value"
+                    value="10"
+                  />
+                  <div class="equation-box__variable">x3</div>
+                </div>
+                <div class="equation-box__sign">=</div>
+                <div class="equation-box__item">
+                  <input
+                    type="text"
+                    class="equation-box__input answer"
+                    value="8"
+                  />
+                </div>
+              </div>
+            </div>
+            <!--<div class="equation-box">
+						<div class="equation-box__row">
+							<div class="equation-box__item">
+								<input type="text" class="equation-box__input value" value="5">
+								<div class="equation-box__variable">x1</div>
+							</div>
+							<div class="equation-box__sign">+</div>
+							<div class="equation-box__item">
+								<input type="text" class="equation-box__input value" value="2"> 
+								<div class="equation-box__variable">x2</div>
+							</div>
+							<div class="equation-box__sign">+</div>
+							<div class="equation-box__item">
+								<input type="text" class="equation-box__input value" value="1">
+								<div class="equation-box__variable">x3</div>
+							</div>
+							<div class="equation-box__sign">=</div>
+							<div class="equation-box__item">
+								<input type="text" class="equation-box__input answer" value="-12">
+							</div>
+						</div>
+						<div class="equation-box__row">
+							<div class="equation-box__item">
+								<input type="text" class="equation-box__input value" value="-1">
+								<div class="equation-box__variable">x1</div>
+							</div>
+							<div class="equation-box__sign">+</div>
+							<div class="equation-box__item">
+								<input type="text" class="equation-box__input value" value="4">
+								<div class="equation-box__variable">x2</div>
+							</div>
+							<div class="equation-box__sign">+</div>
+							<div class="equation-box__item">
+								<input type="text" class="equation-box__input value" value="2">
+								<div class="equation-box__variable">x3</div>
+							</div>
+							<div class="equation-box__sign">=</div>
+							<div class="equation-box__item">
+								<input type="text" class="equation-box__input answer" value="20">
+							</div>
+						</div>
+						<div class="equation-box__row">
+							<div class="equation-box__item">
+								<input type="text" class="equation-box__input value" value="2">
+								<div class="equation-box__variable">x1</div>
+							</div>
+							<div class="equation-box__sign">+</div>
+							<div class="equation-box__item">
+								<input type="text" class="equation-box__input value" value="-3">
+								<div class="equation-box__variable">x2</div>
+							</div>
+							<div class="equation-box__sign">+</div>
+							<div class="equation-box__item">
+								<input type="text" class="equation-box__input value" value="10">
+								<div class="equation-box__variable">x3</div>
+							</div>
+							<div class="equation-box__sign">=</div>
+							<div class="equation-box__item">
+								<input type="text" class="equation-box__input answer" value="3">
+							</div>
+						</div>
+					</div>-->
+            <button type="button" class="equation-box__check">Решить</button>
+          </div>
+          <div class="equation__solution"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="script.js"></script>
+</html>

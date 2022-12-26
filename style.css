@@ -1,0 +1,87 @@
+html, body {
+	color: #000;
+	font-size: 20px;
+	margin: 0;
+	height: 100%;
+	font-family: Arial;
+}
+
+.wrapper {
+	width: 100%;
+	min-height: 100%;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	padding: 30px 0;
+}
+
+.container {
+	max-width:  1200px;
+	margin: 0 auto;
+	width: 100%;
+}
+
+.equation {
+}
+
+.equation__title {
+	text-align: center;
+	font-size: 26px;
+}
+
+.equation__body {
+	display: grid;
+	align-items: center;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+.equation-box {
+	margin-bottom: 20px;
+}
+
+.equation-box__row {
+	display: flex;
+	gap: 10px;
+	margin-bottom: 10px;
+}
+
+.equation-box__item {
+	display: flex;
+	gap: 10px;
+}
+
+.equation-box__input {
+	max-width: 40px;
+	text-align: center;
+}
+
+.equation-box__variable {
+}
+
+.equation-box__sign {
+}
+
+.equation-box__check {
+	background-color: #fff;
+	padding: 10px;
+	text-transform: uppercase;
+	letter-spacing: 5px;
+	font-size: 18px;
+	transition: all 0.8s ease 0s;
+	cursor: pointer;
+}
+
+.equation-box__check:hover {
+	background-color: rgb(224, 200, 200);
+}
+
+table {
+	margin: 30px 0px 0px 0px;
+	width: 100%;
+	text-align: center;
+}
+
+th, td {
+	padding: 10px;
+}
