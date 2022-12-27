@@ -89,23 +89,16 @@ td {
 	padding: 10px;
 }
 
-.equation__matrixA {
+.equation__matrixA,
+.equation__dicrepancies,
+.equation__relaxation {
 	display: grid;
 	gap: 20px;
 }
 
-.equation__matrixA table {
-	max-width: 300px;
-	margin: 0 auto;
-	border: 1px solid #000;
-}
-
-.equation__dicrepancies {
-	display: grid;
-	gap: 20px;
-}
-
-.equation__dicrepancies table {
+.equation__matrixA table,
+.equation__dicrepancies table,
+.equation__relaxation table {
 	max-width: 300px;
 	margin: 0 auto;
 	border: 1px solid #000;

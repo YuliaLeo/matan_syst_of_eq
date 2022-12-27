@@ -337,6 +337,23 @@ const showDiscrepancies = () => {
   document.querySelector(".equation__dicrepancies").append(table);
 };
 
+const showRelaxationMatrixForm = (matrix) => {
+  if (document.querySelector(".equation__relaxation table"))
+    document.querySelector(".equation__relaxation table").remove();
+
+  let table = document.createElement("table");
+
+  for (let i = 0; i < matrix.length; i++) {
+    let row = "";
+    for (let j = 0; j < matrix[i].length; j++) {
+      row += `<td>${matrix[i][j]}</td>`;
+    }
+    table.insertAdjacentHTML("beforeend", `<tr>${row}</tr>`);
+  }
+
+  document.querySelector(".equation__relaxation").append(table);
+};
+
 // !Основная функция
 const solveSystemOfEquations = () => {
   removeTable();
@@ -364,6 +381,8 @@ const solveSystemOfEquations = () => {
       matrix,
       vector
     );
+
+    showRelaxationMatrixForm(relaxationMatrixForm);
 
     // вычисляем решения и выводим в таблицу
     for (let i = 0; i < 6; i++) {
@@ -397,6 +416,7 @@ const solveSystemOfEquations = () => {
 
     document.querySelector(".equation__solution").prepend(table);
   } else {
+    showCanonicalMatrixA();
     alert("Метод не сходится. Введите другое уравнение");
   }
 };
