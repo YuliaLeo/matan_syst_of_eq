@@ -5,6 +5,8 @@ let simpleIterationCount;
 // Переменная для хранения канонической матрицы A
 let canonicalMatrixA;
 
+let discrepancies;
+
 // Функции для проверки условия сходимости алгоритмов
 
 // Получение канонической формы матрицы A для проверки условия сходимости
@@ -126,11 +128,6 @@ const getRelaxationMatrixForm = (matrix, vector) => {
     }
   }
 
-  console.log(
-    "Вид матрицы для метода релаксаций (коэффициенты столбца свободных членов в начале)"
-  );
-  console.log(newMatrixForm);
-
   return newMatrixForm;
 };
 
@@ -138,14 +135,20 @@ const getRelaxationMatrixForm = (matrix, vector) => {
 const relaxationMethod = (matrix, eps) => {
   let rows = matrix.length;
   let cols = matrix[0].length;
-  let xVector = [0, 0, 0]; // вектор начальных приближений
+  let xVector = []; // вектор начальных приближений
   let maxDiscrepancy, indexOfDiscrepancy; // максимальная невязка и ее номер
   let changeDiscrepancy; // величина, на которую будет меняться вектор начальных приближений
   relaxationCount = 0;
+  discrepancies = [];
+
+  for (let i = 0; i < rows; i++) {
+    xVector.push(0);
+  }
 
   do {
     maxDiscrepancy = 0;
     indexOfDiscrepancy = 0;
+    discrepancies.push([]);
 
     for (let i = 0; i < rows; i++) {
       let currentDiscrepancy = 0;
@@ -156,7 +159,7 @@ const relaxationMethod = (matrix, eps) => {
         else currentDiscrepancy += matrix[i][j];
       }
 
-      console.log(`R${i + 1} = `, currentDiscrepancy);
+      discrepancies[relaxationCount].push(currentDiscrepancy);
 
       // находим максимальную по модулю невязку
       if (Math.abs(currentDiscrepancy) > maxDiscrepancy) {
@@ -165,8 +168,6 @@ const relaxationMethod = (matrix, eps) => {
         indexOfDiscrepancy = i;
       }
     }
-
-    console.log("next step");
 
     // меняем значение соответствующей компоненты вектора начального приближения
     xVector[indexOfDiscrepancy] += changeDiscrepancy;
@@ -202,11 +203,15 @@ const stopCondition = () => {
 
 // Метод простой итерации
 const simpleIterationMethod = (matrix, eps) => {
-  let xVector = [0, 0, 0]; // вектор начальных приближений
+  let xVector = []; // вектор начальных приближений
   let rows = matrix.length;
   let cols = rows;
   simpleIterationCount = 0;
   let condition = true;
+
+  for (let i = 0; i < rows; i++) {
+    xVector.push(0);
+  }
 
   while (condition) {
     let xn = [];
@@ -274,13 +279,13 @@ const putSolutionIntoString = (solution) => {
   return result;
 };
 
-// !Основная функция
-const solveSystemOfEquations = () => {
+const removeTable = () => {
   if (document.querySelector(".equation__solution table"))
     document.querySelector(".equation__solution table").remove();
+};
+
+const getMatrixValues = (matrix, vector) => {
   const rows = document.querySelectorAll(".equation-box__row");
-  let matrix = [];
-  let vector = [];
 
   // заполнение матрицы и вектора свободных членов значениями из формы
   for (let i = 0; i < rows.length; i++) {
@@ -296,9 +301,56 @@ const solveSystemOfEquations = () => {
     const inputAnswer = row.querySelector(".equation-box__input.answer").value;
     vector.push(Number(inputAnswer));
   }
+};
+
+const showCanonicalMatrixA = () => {
+  if (document.querySelector(".equation__matrixA table"))
+    document.querySelector(".equation__matrixA table").remove();
+
+  let table = document.createElement("table");
+
+  for (let i = 0; i < canonicalMatrixA.length; i++) {
+    let row = "";
+    for (let j = 0; j < canonicalMatrixA[i].length; j++) {
+      row += `<td>${canonicalMatrixA[i][j]}</td>`;
+    }
+    table.insertAdjacentHTML("beforeend", `<tr>${row}</tr>`);
+  }
+
+  document.querySelector(".equation__matrixA").append(table);
+};
+
+const showDiscrepancies = () => {
+  if (document.querySelector(".equation__dicrepancies table"))
+    document.querySelector(".equation__dicrepancies table").remove();
+
+  let table = document.createElement("table");
+
+  for (let i = 0; i < discrepancies.length; i++) {
+    let row = "";
+    for (let j = 0; j < discrepancies[i].length; j++) {
+      row += `<td>${discrepancies[i][j].toFixed(3)}</td>`;
+    }
+    table.insertAdjacentHTML("beforeend", `<tr>${row}</tr>`);
+  }
+
+  document.querySelector(".equation__dicrepancies").append(table);
+};
+
+// !Основная функция
+const solveSystemOfEquations = () => {
+  removeTable();
+
+  let matrix = [];
+  let vector = [];
+
+  getMatrixValues(matrix, vector);
 
   // проверка условия сходимости (подходит и для метода релаксаций и метода простой итерации)
   if (checkMethodConvergence(matrix)) {
+    // выводим каноническую матрицу А
+    showCanonicalMatrixA();
+
     let eps = 0.1;
     let table = document.createElement("table");
     table.insertAdjacentHTML(
@@ -341,6 +393,8 @@ const solveSystemOfEquations = () => {
       eps *= 0.1;
     }
 
+    showDiscrepancies();
+
     document.querySelector(".equation__solution").prepend(table);
   } else {
     alert("Метод не сходится. Введите другое уравнение");
@@ -353,3 +407,57 @@ document
   .addEventListener("click", function (e) {
     solveSystemOfEquations();
   });
+
+// вставка строк
+const insertRows = () => {
+  document.querySelector(".equation-box").insertAdjacentHTML(
+    "beforeend",
+    `<div class="equation-box__row">
+			<div class="equation-box__item">
+				<input
+					type="text"
+					class="equation-box__input value"
+					value=""
+				/>
+				<div class="equation-box__variable">x</div>
+			</div>
+			<button type="button" class="button-col-insert" onclick="insertCols(this)">+</button>
+			<div class="equation-box__sign">=</div>
+			<div class="equation-box__item">
+		  		<input
+			 		type="text"
+			 		class="equation-box__input answer"
+			 		value=""
+		  		/>
+			</div>
+		</div>`
+  );
+};
+document
+  .querySelector(".button-row-insert")
+  .addEventListener("click", function (e) {
+    insertRows();
+  });
+
+// вставка столбцов
+const insertCols = (e) => {
+  e.closest("div")
+    .querySelector("button")
+    .insertAdjacentHTML(
+      "beforebegin",
+      `	<div class="equation-box__sign">+</div>
+	 	<div class="equation-box__item">
+			<input
+			type="text"
+			class="equation-box__input value"
+			value=""
+			/>
+		<div class="equation-box__variable">x</div>
+	 	</div>`
+    );
+};
+document.querySelectorAll(".button-col-insert").forEach((button) => {
+  button.addEventListener("click", function (e) {
+    insertCols(e.target);
+  });
+});
