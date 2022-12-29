@@ -91,14 +91,16 @@ td {
 
 .equation__matrixA,
 .equation__dicrepancies,
-.equation__relaxation {
+.equation__relaxation,
+.equation__norms {
 	display: grid;
 	gap: 20px;
 }
 
 .equation__matrixA table,
 .equation__dicrepancies table,
-.equation__relaxation table {
+.equation__relaxation table,
+.equation__norms table {
 	max-width: 300px;
 	margin: 0 auto;
 	border: 1px solid #000;

@@ -87,6 +87,35 @@ const calculateKNorm = (matrix) => {
   return kNorm;
 };
 
+const showNorms = (matrixNorms) => {
+  if (document.querySelector(".equation__norms table"))
+    document.querySelector(".equation__norms table").remove();
+
+  let table = document.createElement("table");
+  let normName;
+
+  for (let i = 0; i < matrixNorms.length; i++) {
+    switch (i) {
+      case 0:
+        normName = "M";
+        break;
+      case 1:
+        normName = "L";
+        break;
+      case 2:
+        normName = "K";
+        break;
+    }
+
+    table.insertAdjacentHTML(
+      "beforeend",
+      `<tr>${normName} </tr><tr> ${matrixNorms[i]}</tr>`
+    );
+  }
+
+  document.querySelector(".equation__norms").append(table);
+};
+
 // Вызов функции подсчета всех трех норм
 const calculateMatrixNorms = (matrix) => {
   let matrixNorms = [
@@ -94,6 +123,8 @@ const calculateMatrixNorms = (matrix) => {
     calculateLNorm(matrix),
     calculateKNorm(matrix),
   ];
+
+  showNorms(matrixNorms);
 
   // возвращение только тех норм, которые меньше 1
   return matrixNorms.filter((matrixNorm) => matrixNorm < 1);
